@@ -1,0 +1,21 @@
+import {chromium} from 'playwright';
+const b=await chromium.launch({executablePath:'/workspace/mau-scrapbook/.pw/chromium_headless_shell-1248/chrome-headless-shell-linux64/chrome-headless-shell'});
+const ctx=await b.newContext({viewport:{width:1280,height:720},recordVideo:{dir:'/workspace/mau-orig/site/.tmp/vid',size:{width:1280,height:720}}});
+const c0=Date.now();const p=await ctx.newPage();const R=0.2;
+await p.addInitScript(R=>{const pn=performance.now.bind(performance),b=pn();performance.now=()=>b+(pn()-b)*R;
+ const raf=window.requestAnimationFrame.bind(window);window.requestAnimationFrame=cb=>raf(t=>cb(b+(t-b)*R));
+ setInterval(()=>{document.getAnimations().forEach(a=>a.playbackRate=R);document.querySelectorAll('video').forEach(v=>v.playbackRate=0.25);},30);},R);
+const errs=[];p.on('pageerror',e=>errs.push(e.message));
+await p.goto('http://localhost:4210',{waitUntil:'commit'});
+await p.waitForFunction(()=>document.fonts&&document.querySelector('#cover')&&document.readyState!=='loading',null,{timeout:300000});
+const tStart=(Date.now()-c0)/1000;
+await p.waitForFunction(()=>window.__ready,null,{timeout:600000});
+const wig=async(ms)=>{const s=Date.now();while(Date.now()-s<ms){const t=(Date.now()-s)/1000*R;await p.mouse.move(640+Math.sin(t*1.5)*380,360+Math.cos(t*1.1)*180);}};
+const glide=async(y,ms)=>{const s0=await p.evaluate(()=>scrollY);const s=Date.now();
+ while(true){const k=Math.min(1,(Date.now()-s)/ms);await p.evaluate(v=>window.__lenis.scrollTo(v,{immediate:true,force:true}),s0+(y-s0)*(0.5-0.5*Math.cos(Math.PI*k)));if(k>=1)break;}};
+await wig(2500/R);
+const T=await p.evaluate(()=>window.__ST.getAll().filter(s=>(s.vars.id||'').startsWith('turn')).map(s=>[s.start,s.end]));console.log(JSON.stringify(T));
+const steps=[[T[0][1],6500,1200],[T[0][0]+ (T[0][1]-T[0][0])*.35,2500,600],[T[0][1],2500,800],[T[1][0],4500,300],[T[1][1],6500,1500],[T[2][1],6500,1200],[T[3][1],6500,1800],[T[4][0],4000,300],[T[4][1],6500,2500]];
+for(const [y,g,w] of steps){await glide(y,g/R);await wig(w/R);}
+console.log('start',tStart,'sec',(Date.now()-c0)/1000,errs.join('\n')||'no errors');
+await ctx.close();await b.close();

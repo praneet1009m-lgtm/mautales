@@ -1,0 +1,198 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>(function(){var m=document.querySelector('meta[name=viewport]'),W=Math.max(screen.width,screen.height),H=Math.min(screen.width,screen.height),L=innerWidth>innerHeight;if(matchMedia('(pointer:coarse)').matches&&L&&H<600){m.content='width='+Math.round(720*W/H)+',user-scalable=no'}var o=L;addEventListener('resize',function(){var l=innerWidth>innerHeight;if(l!==o&&matchMedia('(pointer:coarse)').matches){o=l;location.reload()}})})()</script>
+<title>Mansi — The Mau Tales · scrapbook</title><meta name="description" content="Mansi — engineering student & lifestyle creator. The Mau Tales scrapbook.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link crossorigin="anonymous" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=DM+Serif+Display:ital@0;1&family=Special+Elite&family=Nanum+Pen+Script&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/src/style.css"></head><body class="loading">
+
+<svg width="0" height="0" style="position:absolute"><defs>
+<filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter>
+</defs></svg>
+
+<!-- COVER / preloader -->
+<div id="cover"><div class="book">
+ <div class="pageblock"></div>
+ <div class="cv"><div class="cv-front">
+  <div class="stitch"></div>
+  <div class="cv-label torn"><small>vol. 01 — the journal of</small><svg class="hw" data-size="150" data-text="Mansi"></svg><span>The Mau Tales</span></div>
+  <img class="cv-crown" src="/img/hero/crown.webp" alt="">
+  <img class="cv-flower" src="/img/services/flowers.webp" alt="">
+  <img class="cv-seal" src="/img/contact/seal.webp" alt="">
+  <div class="cv-count"><span id="count">0</span><i>%</i><em>gathering memories…</em></div>
+  <div class="band"></div>
+ </div><div class="cv-back"></div></div>
+</div><p class="cv-hint">opening the scrapbook</p></div>
+
+<div id="leaf"><div class="lf-f"></div><div class="lf-b"></div></div>
+<div id="grain"></div>
+<div id="cursor"><svg viewBox="0 0 48 48"><path d="M3 22 45 4 33 44 22 28Z" fill="#fffaf0" stroke="#3b2417" stroke-width="2" stroke-linejoin="round"/><path d="M45 4 22 28 25 40" fill="none" stroke="#3b2417" stroke-width="2" stroke-linejoin="round"/><path d="M22 28 33 44" fill="#e9d6bc" stroke="#3b2417" stroke-width="2"/></svg><b>drag</b></div>
+
+<header class="nav"><a href="#hero" class="brand">Mau<i>.</i></a>
+<button id="musicBtn" class="music" aria-label="Toggle music"><span class="reel"></span><span class="reel"></span><small>play our song</small></button></header>
+<nav class="tabs"><a href="#moments" style="--c:#e8a3a0">Moments</a><a href="#about" style="--c:#b9c99a">About</a><a href="#services" style="--c:#e9c46a">Services</a><a href="#content" style="--c:#d9a7c7">Content</a><a href="#contact" style="--c:#a8c3d6">Contact</a></nav>
+<audio id="music" src="/audio/BackgroundMusic.mp3" loop preload="none"></audio>
+
+<main>
+<!-- HERO -->
+<section id="hero" class="spread hero"><div class="sheet">
+ <svg class="doo stamp st-hero" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="sp-st-hero" d="M60 60m-40 0a40 40 0 1 1 80 0a40 40 0 1 1-80 0"/></defs><circle cx="60" cy="60" r="54" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="60" cy="60" r="31" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 4"/><text font-size="13" letter-spacing="3" fill="currentColor"><textPath href="#sp-st-hero">THE MAU TALES · VOL 01 · 2026 · </textPath></text><path d="M48 62l8 8 16-20" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>
+ <div class="pg pg-l">
+  <p class="type">Hello, I'm —</p>
+  <h1><svg class="hw big" data-size="300" data-text="Mansi"></svg><span class="sr">Mansi</span></h1>
+  <img class="h-crown pop" src="/img/hero/crown.webp" alt="">
+  <svg class="doodle d-under" viewBox="0 0 400 40"><path d="M5 25 C80 8 160 34 240 18 S360 10 395 22"/></svg>
+  <h2 class="tag-l"><span>Collecting</span> <em>moments,</em><br><span>creating</span> <em>memories.</em></h2>
+  <p class="desc">Engineering student &amp; lifestyle creator — sharing everyday stories through creativity, curiosity and meaningful moments. Welcome to <b>The Mau Tales</b>.</p>
+  <div class="cta">
+   <a class="stk pop yt" href="https://www.youtube.com/@MansiMauu" target="_blank" rel="noopener"><img src="/img/contact/youtube.webp" alt="YouTube — The Mau Tales"></a>
+   <a class="stk pop ig" href="https://www.instagram.com/mansiooforsuree" target="_blank" rel="noopener"><img src="/img/contact/insta.webp" alt="Instagram @mansiooforsuree"></a>
+  </div>
+ </div>
+ <div class="pg pg-r">
+  <div class="kraftback torn drag dp" data-d="1"></div>
+  <figure class="hero-pic drag" data-d="2"><img src="/img/hero/hero_pic.webp" alt="Mansi"><i class="tape t1"></i><i class="tape t2"></i></figure>
+  <img class="film drag" data-d="3" src="/img/hero/film1.webp" alt="">
+  <figure class="pol drag p1" data-d="4"><img src="/img/hero/pic1.webp" alt=""><figcaption>sunday walks</figcaption><i class="tape"></i></figure>
+  <figure class="pol drag p2" data-d="3"><img src="/img/hero/pic4.webp" alt=""><figcaption>with my girls ♡</figcaption><i class="tape"></i></figure>
+  <img class="stkr note drag pop" data-d="5" src="/img/hero/note_top.webp" alt="Live simply. Capture deeply. Cherish always.">
+  <img class="stkr nb drag pop" data-d="4" src="/img/hero/note_bottom.webp" alt="">
+  <img class="stkr cam drag pop" data-d="6" src="/img/services/cam.webp" alt="">
+  <img class="stkr coffee drag pop blur" data-d="7" src="/img/services/coffee.webp" alt="">
+  <svg class="doodle d-arrow" viewBox="0 0 220 140"><path d="M10 120 C40 40 120 20 150 70 C170 105 120 120 120 90 C120 50 180 30 205 25"/><path d="M190 15 L207 24 L195 40"/></svg>
+  <span class="hand note-hand">that's me! →</span>
+ </div>
+ <div class="scroll-hint"><span>turn the page</span><svg viewBox="0 0 30 60"><path d="M15 2v52M5 44l10 12 10-12"/></svg></div>
+</div></section>
+
+<div class="washi-mq"><div class="mq"><span>vlogs ✿ travel ✿ fashion ✿ beauty ✿ reels ✿ UGC ✿ café hopping ✿ the mau tales ✿&nbsp;</span><span>vlogs ✿ travel ✿ fashion ✿ beauty ✿ reels ✿ UGC ✿ café hopping ✿ the mau tales ✿&nbsp;</span></div></div>
+
+<!-- MOMENTS -->
+<section id="moments" class="spread moments"><div class="sheet board">
+ <svg class="doo star sr-mo" viewBox="0 0 60 60" aria-hidden="true"><path d="M30 6l6 17 18 1-14 11 5 18-15-10-15 10 5-18L6 24l18-1z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/></svg><p class="doo note-h nh-mo">summer '24 — best days ♡</p>
+ <div class="mo-head"><p class="type">chapter 01 · moments</p><h2><svg class="hw" data-size="130" data-text="collect beautiful moments"></svg></h2><p class="hand sub">little pieces of the mau tales — go on, drag them around ♡</p></div>
+ <div class="collage">
+  <figure class="pol drag c" data-cap="golden hour"><img src="/img/hero/pic1.webp" alt=""><figcaption>golden hour</figcaption><i class="tape"></i></figure>
+  <figure class="pol drag c" data-cap="beach days"><img src="/img/about/6.webp" alt=""><figcaption>beach days ☀</figcaption><i class="tape"></i></figure>
+  <figure class="pol drag c wide"><img src="/img/hero/pic4.webp" alt=""><figcaption>my people</figcaption><i class="tape"></i></figure>
+  <figure class="pol drag c"><img src="/img/hero/pic2.webp" alt=""><figcaption>soft days</figcaption><i class="tape"></i></figure>
+  <figure class="pol drag c wide"><img src="/img/hero/pic5.webp" alt=""><figcaption>vlog diaries</figcaption><i class="tape"></i></figure>
+  <figure class="pol drag c tall"><video src="/img/hero/vid.mp4" muted loop playsinline autoplay></video><figcaption>▶ first vlog</figcaption><i class="tape"></i></figure>
+  <figure class="pol drag c"><img src="/img/about/15.webp" alt=""><figcaption>main character</figcaption><i class="tape"></i></figure>
+  <figure class="pol drag c wide"><img src="/img/hero/pic6.webp" alt=""><figcaption>introducing…</figcaption><i class="tape"></i></figure>
+  <figure class="pol drag c tall"><img src="/img/hero/pic3.webp" alt=""><figcaption>bloom</figcaption><i class="tape"></i></figure>
+  <img class="stkr drag c s" src="/img/about/flower1.webp" alt="">
+  <img class="stkr drag c s" src="/img/about/heart.webp" alt="">
+  <img class="stkr drag c s" src="/img/about/star.webp" alt="">
+ </div>
+ <img class="stkr mo-film blur" src="/img/hero/film.webp" alt="">
+ <p class="hand mo-hint">↺ drag the photos to rearrange</p>
+</div></section>
+
+<!-- ABOUT -->
+<section id="about" class="spread about"><div class="sheet">
+ <svg class="doo stamp st-ab" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="sp-st-ab" d="M60 60m-40 0a40 40 0 1 1 80 0a40 40 0 1 1-80 0"/></defs><circle cx="60" cy="60" r="54" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="60" cy="60" r="31" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 4"/><text font-size="13" letter-spacing="3" fill="currentColor"><textPath href="#sp-st-ab">CERTIFIED · STORYTELLER · </textPath></text><path d="M48 62l8 8 16-20" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg><p class="doo note-h nh-ab">p.s. coffee first, always ☕</p>
+ <div class="pg pg-l lined">
+  <img class="tab-about pop" src="/img/about/tag1.webp" alt="About me">
+  <figure class="ab-photo drag"><img class="fr" src="/img/about/frame.webp" alt=""><img class="ph" src="/img/about/6.webp" alt="Mansi at the beach"><i class="tape t1"></i></figure>
+  <img class="stkr ab-cam drag pop" src="/img/about/cam.webp" alt="">
+  <img class="stkr ab-fl drag pop" src="/img/about/flower2.webp" alt="Dream, plan, execute, repeat">
+  <img class="stkr ab-tag2 drag pop" src="/img/about/tag2.webp" alt="Collecting moments, creating memories">
+ </div>
+ <div class="pg pg-r lined">
+  <p class="type">chapter 02 · a little bit about me</p>
+  <h2><svg class="hw" data-size="150" data-text="hello, I'm Mansi"></svg></h2>
+  <svg class="doodle d-under2" viewBox="0 0 400 40"><path d="M5 20 C100 34 200 6 395 20"/></svg>
+  <p class="big">I'm an engineering student and a lifestyle creator who loves turning everyday moments into meaningful stories.</p>
+  <p>Through my content, I share my journey, experiences, and creativity in the most authentic way possible. <span class="hl">The Mau Tales is not just a channel, it's a part of me.</span></p>
+  <img class="card pop" src="/img/about/card.webp" alt="A little bit about me">
+  <p class="hand sign">thanks for being here! ♡ — Mau</p>
+  <img class="stkr ab-fl2 drag pop" src="/img/about/flower1.webp" alt="Focus, passion, discipline, progress">
+  <svg class="doodle d-loop" viewBox="0 0 260 120"><path d="M8 100 C60 100 70 20 120 30 C170 40 140 100 110 80 C80 60 160 10 250 18"/><path d="M234 6 L252 18 L236 32"/></svg>
+ </div>
+</div></section>
+
+<!-- SERVICES -->
+<section id="services" class="spread services"><div class="sheet kraft">
+ <p class="doo note-h nh-sv">open for collabs ✿<br>winter 2026</p><svg class="doo star sr-sv" viewBox="0 0 60 60" aria-hidden="true"><path d="M30 6l6 17 18 1-14 11 5 18-15-10-15 10 5-18L6 24l18-1z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/></svg>
+ <div class="sv-track">
+  <div class="sv-intro">
+   <p class="type">chapter 03 · work with me</p>
+   <h2><svg class="hw light" data-size="150" data-text="my services"></svg></h2>
+   <p class="hand sub">helping brands tell their story through authentic, engaging &amp; relatable content ♡</p>
+   <img class="sv-mau" src="/img/services/mau.webp" alt="Mansi">
+   <img class="stkr sv-book pop" src="/img/services/book.webp" alt="">
+   <img class="stkr sv-pen" src="/img/services/pen.webp" alt="">
+  </div>
+  <div class="line">
+   <svg class="string" preserveAspectRatio="none" viewBox="0 0 1000 100"><path d="M0 10 Q500 110 1000 10"/></svg>
+   <div class="tags">
+    <div class="hang"><i class="pin"></i><img src="/img/services/reels.webp" alt="Instagram Reels"></div>
+    <div class="hang"><i class="pin"></i><img src="/img/services/ugc.webp" alt="UGC Content"></div>
+    <div class="hang"><i class="pin"></i><img src="/img/services/sponsored.webp" alt="Sponsored Posts"></div>
+    <div class="hang"><i class="pin"></i><img src="/img/services/brand.webp" alt="Brand Collaborations"></div>
+    <div class="hang"><i class="pin"></i><img src="/img/services/review.webp" alt="Product Reviews & Unboxing"></div>
+    <div class="hang"><i class="pin"></i><img src="/img/services/stories.webp" alt="Instagram Stories"></div>
+    <div class="hang"><i class="pin"></i><img src="/img/services/lifestyle.webp" alt="Lifestyle & Travel"></div>
+    <div class="hang"><i class="pin"></i><img src="/img/services/fashion.webp" alt="Fashion & Beauty"></div>
+    <div class="hang"><i class="pin"></i><img src="/img/services/food.webp" alt="Food & Café Promotion"></div>
+    <div class="hang"><i class="pin"></i><img src="/img/services/tech.webp" alt="Tech Content"></div>
+   </div>
+  </div>
+  <div class="sv-end"><img class="stkr pop" src="/img/contact/available_for.webp" alt="Available for brand collaborations, UGC, product reviews"><p class="hand">let's work together →</p></div>
+ </div>
+ <div class="sv-prog"><i id="svBar"></i></div>
+</div></section>
+
+<!-- CONTENT -->
+<section id="content" class="spread content"><div class="sheet">
+ <svg class="doo star sr-co" viewBox="0 0 60 60" aria-hidden="true"><path d="M30 6l6 17 18 1-14 11 5 18-15-10-15 10 5-18L6 24l18-1z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/></svg>
+ <div class="pg pg-l co-l">
+  <p class="type">chapter 04 · the mau tales on youtube</p>
+  <h2><svg class="hw" data-size="150" data-text="my content"></svg></h2>
+  <p class="hand sub">vlogs, little stories &amp; everyday chaos, straight from my channel ♡</p>
+  <div class="co-stats pop"><span><b>240</b> subscribers</span><span><b>11</b> videos</span><span class="hd">@mansimauu</span></div>
+  <a class="sub-btn pop" href="https://www.youtube.com/@mansimauu?sub_confirmation=1" target="_blank" rel="noopener"><i aria-hidden="true"></i>Subscribe on YouTube</a>
+  <p class="doo note-h nh-co">new vlogs, pinky promise ✿</p>
+  <div class="shorts pop"><p class="hand lbl">shorts ✂ <small>tap one to watch</small></p><div class="strip"><a class="fr" href="https://www.youtube.com/shorts/s2mBiQzp1Uc" data-yt="s2mBiQzp1Uc" data-short="1" target="_blank" rel="noopener" title="transition ✨ — 9 Feb 2026"><img src="/yt/s2mBiQzp1Uc.webp" alt="Short: transition ✨"><span>180 views</span></a><a class="fr" href="https://www.youtube.com/shorts/yXhniFOILDA" data-yt="yXhniFOILDA" data-short="1" target="_blank" rel="noopener" title="Engineering students life — 25 Jan 2026"><img src="/yt/yXhniFOILDA.webp" alt="Short: Engineering students life"><span>1,094 views</span></a><a class="fr" href="https://www.youtube.com/shorts/xyJa-wStcCM" data-yt="xyJa-wStcCM" data-short="1" target="_blank" rel="noopener" title="Marathi core — 23 Jan 2026"><img src="/yt/xyJa-wStcCM.webp" alt="Short: Marathi core"><span>1,290 views</span></a><a class="fr" href="https://www.youtube.com/shorts/GvJLfmbod4s" data-yt="GvJLfmbod4s" data-short="1" target="_blank" rel="noopener" title="Camera shy ❎ Professional vlogger ✅ — 22 Jan 2026"><img src="/yt/GvJLfmbod4s.webp" alt="Short: Camera shy ❎ Professional vlogger ✅"><span>1,564 views</span></a><a class="fr" href="https://www.youtube.com/shorts/KFBepyrHDAg" data-yt="KFBepyrHDAg" data-short="1" target="_blank" rel="noopener" title="Based on true events — 21 Jan 2026"><img src="/yt/KFBepyrHDAg.webp" alt="Short: Based on true events"><span>1,422 views</span></a><a class="fr" href="https://www.youtube.com/shorts/WckXw83NMFE" data-yt="WckXw83NMFE" data-short="1" target="_blank" rel="noopener" title="Girl with a laugh that turns heads — 20 Jan 2026"><img src="/yt/WckXw83NMFE.webp" alt="Short: Girl with a laugh that turns heads"><span>2,160 views</span></a><a class="fr" href="https://www.youtube.com/shorts/VPUOnl-RxGg" data-yt="VPUOnl-RxGg" data-short="1" target="_blank" rel="noopener" title="Nakhre karayla yetat — 19 Jan 2026"><img src="/yt/VPUOnl-RxGg.webp" alt="Short: Nakhre karayla yetat"><span>1,830 views</span></a></div></div>
+ </div>
+ <div class="pg pg-r co-r">
+  <p class="hand co-latest">latest videos ↓</p>
+  <a class="vid pol pop v1" href="https://www.youtube.com/watch?v=gvIoYvkHDCg" data-yt="gvIoYvkHDCg" target="_blank" rel="noopener" title="We saw LALBAUGCHA RAJA in Mumbai!🥹 Ganpati Pandal hopping vlog😍"><i class="tape" style="--tp:rgba(232,170,160,.8)"></i><span class="ph"><img src="/yt/gvIoYvkHDCg.webp" alt="We saw LALBAUGCHA RAJA in Mumbai!🥹 Ganpati Pandal hopping vlog😍" loading="eager"><b class="play" aria-hidden="true"></b><em class="dur">38:47</em></span><span class="cap"><strong>We saw Lalbaugcha Raja in Mumbai!</strong><small>Ganpati pandal hopping vlog</small><span class="meta">4 Oct 2026 · 172 views</span></span></a>
+  <a class="vid pol pop v2" href="https://www.youtube.com/watch?v=nhphm5oYXdg" data-yt="nhphm5oYXdg" target="_blank" rel="noopener" title="Versova Diaries🏖️|Friends, Waves &amp; Golden Hour✨"><i class="tape" style="--tp:rgba(163,179,131,.8)"></i><span class="ph"><img src="/yt/nhphm5oYXdg.webp" alt="Versova Diaries🏖️|Friends, Waves &amp; Golden Hour✨" loading="eager"><b class="play" aria-hidden="true"></b><em class="dur">11:56</em></span><span class="cap"><strong>Versova Diaries</strong><small>friends, waves &amp; golden hour</small><span class="meta">24 May 2026 · 191 views</span></span></a>
+  <a class="vid pol pop v3" href="https://www.youtube.com/watch?v=wqz68qJ3ffY" data-yt="wqz68qJ3ffY" target="_blank" rel="noopener" title="My first Vlog✨| A day in my life🌼|Majha 1st vlog✨"><i class="tape" style="--tp:rgba(220,168,74,.78)"></i><span class="ph"><img src="/yt/wqz68qJ3ffY.webp" alt="My first Vlog✨| A day in my life🌼|Majha 1st vlog✨" loading="eager"><b class="play" aria-hidden="true"></b><em class="dur">6:58</em></span><span class="cap"><strong>My first Vlog</strong><small>a day in my life · majha 1st vlog</small><span class="meta">21 Jan 2026 · 407 views</span></span></a>
+  <a class="vid pol pop v4" href="https://www.youtube.com/watch?v=-Z9nP7pjp6E" data-yt="-Z9nP7pjp6E" target="_blank" rel="noopener" title="MY FIRST YOUTUBE VIDEO 🤩🫶🏻 | Welcome to My Channel💫 | Introduction video | The Mau Tales"><i class="tape" style="--tp:rgba(168,195,214,.82)"></i><span class="ph"><img src="/yt/-Z9nP7pjp6E.webp" alt="MY FIRST YOUTUBE VIDEO 🤩🫶🏻 | Welcome to My Channel💫 | Introduction video | The Mau Tales" loading="eager"><b class="play" aria-hidden="true"></b><em class="dur">0:10</em></span><span class="cap"><strong>My first YouTube video</strong><small>welcome to my channel</small><span class="meta">15 Jan 2026 · 584 views</span></span></a>
+ </div>
+</div></section>
+
+<div class="washi-mq pink"><div class="mq"><span>let's create something beautiful together ✉ &nbsp;</span><span>let's create something beautiful together ✉ &nbsp;</span></div></div>
+
+<!-- CONTACT -->
+<section id="contact" class="spread contact"><div class="sheet desk">
+ <div class="ct-head"><img class="pop" src="/img/contact/contact_me.webp" alt="Contact me — let's create something beautiful together"></div>
+ <div class="ct-side l">
+  <a class="stk drag pop" href="https://www.instagram.com/mansiooforsuree" target="_blank" rel="noopener"><img src="/img/contact/insta.webp" alt="Instagram"></a>
+  <a class="stk drag pop" href="mailto:mansip1007@gmail.com"><img src="/img/contact/mail.webp" alt="Email mansip1007@gmail.com"></a>
+ </div>
+ <div class="ct-side r">
+  <a class="stk drag pop" href="https://www.youtube.com/@MansiMauu" target="_blank" rel="noopener"><img src="/img/contact/youtube.webp" alt="YouTube"></a>
+  <img class="stk drag pop" src="/img/contact/response_time.webp" alt="Response time: usually within 24 hrs">
+ </div>
+ <img class="stkr ct-phone drag pop" src="/img/contact/telephone.webp" alt="">
+ <div class="env-wrap"><div class="env">
+  <div class="env-back"></div>
+  <form id="letter" class="letter">
+   <p class="hand to">Dear Mau,</p>
+   <label>my name is <input name="name" required placeholder="your name"></label>
+   <label>you can write back at <input name="email" type="email" required placeholder="your email"></label>
+   <label>I'm from <input name="brand" placeholder="brand / company"></label>
+   <label class="ta">and I'd love to… <textarea name="msg" rows="3" required placeholder="tell me about your idea"></textarea></label>
+   <button type="submit"><img src="/img/contact/send_letter.webp" alt="Send letter"></button>
+  </form>
+  <div class="env-front"></div>
+  <div class="env-flap"><div class="ff"></div><div class="fb"></div></div>
+  <img class="seal" src="/img/contact/seal.webp" alt="wax seal">
+ </div></div>
+ <footer><span class="hand">© The Mau Tales</span><span class="type">handmade with glue, tape &amp; love ♡</span><a href="#hero" class="hand">back to the cover ↑</a></footer>
+</div></section>
+</main>
+<div id="ytbox" class="ytbox" hidden><div class="yt-in"><button class="yt-x" aria-label="Close">✕</button><div class="yt-fr"></div><a class="yt-out hand" target="_blank" rel="noopener">open on YouTube ↗</a></div></div>
+<script type="module" src="/src/main.js"></script></body></html>

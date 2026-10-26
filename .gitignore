@@ -1,0 +1,9 @@
+node_modules
+dist
+.tmp
+shots
+.pw
+.rec
+*.mp4
+!public/**/*.mp4
+.vercel
