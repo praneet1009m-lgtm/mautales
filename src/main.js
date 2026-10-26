@@ -137,10 +137,10 @@ function build(){
   .to(flap,{rotationX:180,duration:.22,ease:'power2.inOut'},'-=.08')
   .set(flap,{zIndex:1})
   .addLabel('rise')
-  .to(letter,{y:-lH*.72,duration:.26,ease:'power2.out'})
+  .to(letter,{y:mobile?-lH-envH*.04+envH*.18:-lH*.72,duration:mobile?.27:.26,ease:mobile?'power1.inOut':'power2.out'})
   .set(letter,{zIndex:7})
   .to(letter,{y:()=>{if(mobile)return-lH-envH*.04+envH*.18;const hb=head.getBoundingClientRect().bottom-gsap.getProperty(head,'y');const wr=wrap.offsetTop+$('#contact .sheet').getBoundingClientRect().top-wrap.getBoundingClientRect().height*0;return 0},duration:.001});
- if(mobile)ctl.to(wrap,{y:S,duration:.27,ease:'power1.inOut'},'rise-=.1');
+ if(mobile)ctl.to(wrap,{y:S,duration:.27,ease:'power1.inOut'},'rise');
  // final: letter in front, envelope sinks
  if(!mobile){ctl.to(wrap,{y:()=>innerHeight*.22,scale:.92,duration:.25,ease:'power2.inOut'},'<')
   .to(letter,{y:()=>{const wt=wrap.getBoundingClientRect().top-$('#contact .sheet').getBoundingClientRect().top-(+gsap.getProperty(wrap,'y')||0);const nt=wt+envH*.04;const target=Math.max(innerHeight*.04,Math.min(head.offsetTop+head.offsetHeight+14,innerHeight*.9-lH));return (target-nt)/1-(innerHeight*.22)},rotation:-1.5,duration:.25,ease:'power2.inOut'},'<')
@@ -211,7 +211,7 @@ function build(){
    const ks=Object.keys(set.snaps);const first=ks.includes('#heroexit')?['#heroexit','#momentsexit']:[];const ord=[...first,...ks.filter(k=>!first.includes(k))];
    const ld=async K=>{const e=set.snaps[K],im=new Image();im.src=`/turn/${set.id}/${e.f}`;await im.decode();const h=e.h*vh/set.h,kx=set.dpr*set.w/vw;SN[K]={cvs:im,h,kx,ky:set.dpr*e.h/h,ox:(e.x||0)*vw/set.w};if(K==='#momentsexit')window.__snap1=true};
    await Promise.all(ord.slice(0,2).map(ld));window.__snap1=true;for(const K of ord.slice(2))await ld(K);return true}catch(e){console.warn('pre',e);return false}};
- let lastSz=mobile?innerWidth+'':innerWidth+'x'+innerHeight,rsT;addEventListener('resize',()=>{clearTimeout(rsT);rsT=setTimeout(async()=>{const sz=mobile?innerWidth+'':innerWidth+'x'+innerHeight;if(sz===lastSz||SNAPMODE)return;lastSz=sz;await window.__snaps;window.__kills.forEach(f=>f());for(const K in SN)delete SN[K];varCSS=null;window.__snaps=(async()=>{if(await loadPre())return true;for(const [s,m] of jobs){const K=key(s,m);SN[K]=SN[K]||await snapshot(s,one(s)?'exit':m)}return true})()},400)});
+ let lastSz=mobile?innerWidth+'':innerWidth+'x'+innerHeight,rsT;addEventListener('resize',()=>{clearTimeout(rsT);rsT=setTimeout(async()=>{const sz=mobile?innerWidth+'':innerWidth+'x'+innerHeight;if(sz===lastSz||SNAPMODE)return;lastSz=sz;await window.__snaps;varCSS=null;window.__kills.forEach(f=>f());window.__snaps=(async()=>{ /* old textures stay in use until each new one replaces it, so a turn never shows a blank page */ if(await loadPre())return true;for(const [s,m] of jobs){const K=key(s,m);SN[K]=await snapshot(s,one(s)?'exit':m)||SN[K]}return true})()},400)});
 window.__kills=window.__kills||[];
 window.__exportSnaps=async()=>{await window.__snaps;const o={};for(const K in SN)o[K]={h:SN[K].h,url:SN[K].cvs.toDataURL('image/webp',.92)};return o};
  window.__snaps=(async()=>{await new Promise(r=>setTimeout(r,50));window.__spineSafe();ScrollTrigger.refresh();if(await loadPre())return true;for(const [s,m] of jobs){const t0=performance.now();const K=key(s,m);SN[K]=SN[K]||await snapshot(s,one(s)?'exit':m);if(K==='#momentsexit')window.__snap1=true}return true})();
@@ -221,7 +221,7 @@ window.__exportSnaps=async()=>{await window.__snaps;const o={};for(const K in SN
   while(n&&!n.contains(B)){mids.push(n);n=n.nextElementSibling}
   let T=null;
   const docTop=el=>{let y=0,n=el;while(n){y+=n.offsetTop;n=n.offsetParent}return y};
-  const make=(st)=>{if(T)return;const sa=SN[key(order[k],'exit')],sb=SN[key(order[k+1],'entry')];
+  const make=(st)=>{if(T)return;const sa=SN[key(order[k],'exit')],sb=SN[key(order[k+1],'entry')];if(!sa||!sb)return; // capture not ready: let the pages scroll normally instead of turning a blank sheet
    finishEntry(secB);const vw=innerWidth,vh=innerHeight,X=mobile?0:vw/2,W=mobile?vw:vw/2;
    const yA=sa?Math.max(0,Math.min(sa.h-vh,(A.style.translate='',-(A.getBoundingClientRect().top+scrollY-(st!=null?st:scrollY))))):0;
    const tF=crop(sa,X,yA,W,vh,false),tB=mobile?crop(sb,0,0,W,vh,false):crop(sb,X-W,0,W,vh,false);
@@ -246,7 +246,7 @@ window.__exportSnaps=async()=>{await window.__snaps;const o={};for(const K in SN
    const l2=Math.max(0,X-minx);if(!mobile&&minx<X-2){shL.style.cssText=`display:block;left:${minx-sp}px;width:${l2+sp}px;background:linear-gradient(270deg,rgba(30,15,5,${a*.7}),rgba(30,15,5,${a}) ${Math.max(0,l2-sp*.3)}px,transparent ${l2+sp}px)`}else shL.style.display='none'};
   const bTop=()=>{const e=B.closest('.pin-spacer')||B.closest('section');let y=0,n=e;while(n){y+=n.offsetTop;n=n.offsetParent}return y};
   ScrollTrigger.create({start:()=>{const pv=k?ScrollTrigger.getById('turn'+(k-1)):null;return Math.max(0,pv?pv.end+1:0,bTop()-innerHeight-mids.reduce((t,m)=>t+m.offsetHeight,0))},end:()=>bTop(),invalidateOnRefresh:true,id:'turn'+k,
-   onUpdate:self=>{const p=self.progress;if(p<=0||p>=1){kill();return}make(self.start);gl.domElement.style.display='block';document.body.classList.add('turning');
+   onUpdate:self=>{const p=self.progress;if(p<=0||p>=1){kill();return}make(self.start);if(!T)return;gl.domElement.style.display='block';document.body.classList.add('turning');
     A.style.translate=`0 ${self.scroll()-self.start}px`;B.style.translate=`0 ${-(self.end-self.scroll())}px`;draw(p)},
    onLeave:kill,onLeaveBack:kill});window.__kills.push(kill);
  }

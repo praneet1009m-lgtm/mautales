@@ -423,3 +423,8 @@ body.turning .mo-hint{opacity:0!important;transition:none}
  .tags{row-gap:0}
  .env-wrap{margin-top:3vh}
 }
+@media (max-width:860px) and (orientation:portrait){
+ .hang img{margin-top:calc(26px - 26%);margin-bottom:-30%}
+ .hang:nth-child(even){margin-top:3vh}
+ .tags{row-gap:calc(5*var(--vw))}
+}
