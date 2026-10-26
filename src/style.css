@@ -418,3 +418,8 @@ body.turning .mo-hint{opacity:0!important;transition:none}
  .hang:nth-child(even){margin-top:5vh}
  .hero .cta .stk{width:44vw}
 }
+@media (max-width:860px) and (orientation:portrait){
+ .hang img{margin-top:-6%}
+ .tags{row-gap:0}
+ .env-wrap{margin-top:3vh}
+}
