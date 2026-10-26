@@ -428,3 +428,13 @@ body.turning .mo-hint{opacity:0!important;transition:none}
  .hang:nth-child(even){margin-top:3vh}
  .tags{row-gap:calc(5*var(--vw))}
 }
+/* cover book: real book proportions on portrait phones */
+@media (max-width:860px) and (orientation:portrait){
+ #cover .book{width:min(78vw,calc(70vh*.72));height:auto;aspect-ratio:5/7}
+ .cv-label{padding:6% 6% 7%;top:20%}
+ .cv-label small{font-size:clamp(9px,2.6vw,12px)}
+ .cv-label svg{height:auto;aspect-ratio:2.6/1;margin:2% 0}
+ .cv-label span{font-size:clamp(18px,6vw,26px)}
+ .cv-count{font-size:clamp(28px,9vw,40px);bottom:10%}
+ .cv-count i{font-size:.5em}.cv-count em{font-size:clamp(15px,4.4vw,20px)}
+}
