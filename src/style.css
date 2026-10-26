@@ -411,3 +411,10 @@ body.turning .mo-hint{opacity:0!important;transition:none}
 @media (min-width:861px) and (min-aspect-ratio:2/1){.hang{width:min(calc(22*var(--vw)),36vh)}}
 @media (min-width:861px) and (max-height:760px) and (min-aspect-ratio:2/1){.ct-side{top:31vh;width:min(calc(17*var(--vw)),27vh)}}
 .stkr,.hang{will-change:transform}
+/* mobile polish v2 */
+@media (max-width:860px) and (orientation:portrait){
+ .tags{gap:calc(2*var(--vw)) calc(2*var(--vw));padding:4vh calc(3*var(--vw)) 2vh}
+ .hang img{margin-top:6px;margin-bottom:-24%;width:108%;margin-left:-4%}
+ .hang:nth-child(even){margin-top:5vh}
+ .hero .cta .stk{width:44vw}
+}
