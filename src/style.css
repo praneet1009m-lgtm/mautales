@@ -438,3 +438,12 @@ body.turning .mo-hint{opacity:0!important;transition:none}
  .cv-count{font-size:clamp(28px,9vw,40px);bottom:10%}
  .cv-count i{font-size:.5em}.cv-count em{font-size:clamp(15px,4.4vw,20px)}
 }
+@media (max-width:860px) and (orientation:portrait){
+ #cover .book{width:min(76vw,calc(64vh*.714));margin-bottom:8vh}
+ .band{right:5%;width:12px}
+ .cv-label{left:12%;right:15%}
+ .cv-flower{right:-8%;width:24%}
+ .cv-count{left:10%;bottom:auto;top:calc(100% + 18px);color:#f3dcc0}
+ .cv-seal{width:20%;left:40%;bottom:8%}
+ .cv-hint{bottom:calc(5vh + env(safe-area-inset-bottom));font-size:20px}
+}
