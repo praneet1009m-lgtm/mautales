@@ -111,6 +111,7 @@ function build(){
  wraps.forEach((w,i)=>gsap.set(w,{x:P[i][0]*innerWidth/100,y:P[i][1]*innerHeight/100,rotation:P[i][2]}));
  mtl.to(wraps,{x:i=>P[i][0]*innerWidth/100*1.06,y:i=>P[i][1]*innerHeight/100*1.05-12,rotation:i=>P[i][2]*1.25,duration:.9,stagger:.01,ease:'sine.inOut'},0)
   .to({},{duration:.1});
+ mtl.to('.mo-hint',{opacity:0,duration:.12,ease:'none'},.86); // the hint isn't on the page texture: fade it before the turn instead of popping off
  popIn($('.mo-head'),'#moments');
 
  // keep every card / photo / sticker fully on one page (desktop spreads have a gutter)
@@ -193,7 +194,7 @@ function build(){
  const mat=new THREE.ShaderMaterial({side:THREE.DoubleSide,transparent:false,uniforms:{tF:{value:null},tB:{value:null},bend:{value:0}},
   vertexShader:`varying vec2 vUv;varying vec3 vN;void main(){vUv=uv;vN=normalize(normalMatrix*normal);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
   defines:{MOB:mobile?'1.':'0.'},fragmentShader:`uniform sampler2D tF,tB;uniform float bend;varying vec2 vUv;varying vec3 vN;
-  void main(){vec3 n=normalize(vN);vec4 c;if(gl_FrontFacing){c=texture2D(tF,vUv);}else{n=-n;c=texture2D(tB,vec2(1.-vUv.x,vUv.y));}
+  void main(){vec3 n=normalize(vN);vec4 c;if(gl_FrontFacing){c=texture2D(tF,vUv);}else{n=-n;c=texture2D(tB,vec2(1.-vUv.x,vUv.y));if(MOB>.5){vec4 fr=texture2D(tF,vec2(1.-vUv.x,vUv.y));float g=dot(fr.rgb,vec3(.3,.59,.11));c=vec4(mix(vec3(.93,.88,.78),vec3(g)*vec3(1.,.95,.85),.1),1.);}}
    vec3 L=normalize(vec3(-.35,.3,1.));float d0=L.z;float d=max(dot(n,L),0.);float sh=(.28+.72*d)/(.28+.72*d0);
    vec3 H=normalize(vec3(-.62,.18,.76));float sp=pow(max(dot(n,H),0.),48.)*.32*bend;
    float rim=smoothstep(.0,.35,1.-abs(n.z))*.10*bend; // darken where the sheet turns edge-on
@@ -202,7 +203,13 @@ function build(){
    vec3 col=c.rgb*min(sh,1.06)*ao-rim+vec3(1.,.97,.9)*sp;gl_FragColor=vec4(col,1.);
    #include <colorspace_fragment>
   }`});
- const leaf=new THREE.Mesh(geo,mat);scene.add(leaf);
+ const leaf=new THREE.Mesh(geo,mat);leaf.renderOrder=2;scene.add(leaf);
+ // phones: the page underneath and the cast shadow live in the same fixed GL layer as the leaf, so nothing under the curl
+ // is re-positioned by JS while the browser scrolls natively (that lag made the lower page shake during a touch scroll)
+ const underMat=new THREE.MeshBasicMaterial({map:null,depthTest:false,depthWrite:false,toneMapped:false});const under=new THREE.Mesh(new THREE.PlaneGeometry(1,1),underMat);under.renderOrder=0;under.visible=false;scene.add(under);
+ const shC=document.createElement('canvas');shC.width=256;shC.height=1;{const g=shC.getContext('2d'),gr=g.createLinearGradient(0,0,256,0);gr.addColorStop(0,'rgba(30,15,5,.55)');gr.addColorStop(.55,'rgba(30,15,5,.42)');gr.addColorStop(.82,'rgba(30,15,5,.12)');gr.addColorStop(1,'rgba(30,15,5,0)');g.fillStyle=gr;g.fillRect(0,0,256,1)}
+ const shT=new THREE.CanvasTexture(shC);shT.colorSpace=THREE.SRGBColorSpace;const shMat=new THREE.MeshBasicMaterial({map:shT,transparent:true,depthTest:false,depthWrite:false,toneMapped:false});
+ const shG=new THREE.PlaneGeometry(1,1);shG.translate(.5,0,0);const shM=new THREE.Mesh(shG,shMat);shM.renderOrder=1;shM.visible=false;scene.add(shM);
  const sizeGL=()=>{const vw=innerWidth,vh=innerHeight,D=mobile?1100:1600;gl.setSize(vw,vh);cam.aspect=vw/vh;cam.fov=2*Math.atan(vh/2/D)*180/Math.PI;cam.position.set(0,0,D);cam.updateProjectionMatrix()};sizeGL();addEventListener('resize',sizeGL);
  // pre-render every page state needed (behind the cover / in idle time)
  const SN={};const jobs=[];const one=s=>s==='#moments'||s==='#about';const key=(s,m)=>s+(one(s)?'exit':m);
@@ -232,12 +239,12 @@ window.__exportSnaps=async()=>{await window.__snaps;const o={};for(const K in SN
    const yA=sa?Math.max(0,Math.min(sa.h-vh,(A.style.translate='',-(A.getBoundingClientRect().top+scrollY-(st!=null?st:scrollY))))):0;
    let tF,tB;const cc=TC[k];if(cc&&cc.sa===sa&&cc.sb===sb&&Math.abs(cc.yA-yA)<1.5&&cc.vw===vw&&cc.vh===vh){tF=cc.tF;tB=cc.tB}
    else{tF=crop(sa,X,yA,W,vh,false);tB=mobile?crop(sb,0,0,W,vh,false):crop(sb,X-W,0,W,vh,false);if(mobile){if(cc){cc.tF.dispose();cc.tB.dispose()}TC[k]={sa,sb,yA,vw,vh,tF,tB}}}
-   mat.uniforms.tF.value=tF;mat.uniforms.tB.value=tB;
+   mat.uniforms.tF.value=tF;mat.uniforms.tB.value=tB;if(mobile){underMat.map=tB;underMat.needsUpdate=true;under.scale.set(vw,vh,1);under.position.set(0,0,0);under.visible=true}
    T={X,W,vh,vw,tF,tB};if(warm)return;(mobile?gl.domElement.style.visibility='visible':gl.domElement.style.display='block');document.body.classList.add('turning');
    mids.forEach(m=>m.style.visibility='hidden');
-   if(mobile)A.style.visibility='hidden';else{A.style.clipPath=`inset(0 ${A.offsetWidth-X}px 0 0)`;B.style.clipPath=`inset(0 0 0 ${X}px)`}};
-  const kill=()=>{if(!T)return;if(!TC[k]||TC[k].tF!==T.tF){T.tF.dispose();T.tB.dispose()}T=null;if(mobile){gl.clear();gl.domElement.style.visibility='hidden'}else gl.domElement.style.display='none';shR.style.display=shL.style.display='none';
-   A.style.visibility='';A.style.clipPath='';A.style.translate='';B.style.clipPath='';B.style.translate='';mids.forEach(m=>m.style.visibility='');document.body.classList.remove('turning')};
+   if(mobile){A.style.visibility='hidden';B.style.visibility='hidden'}else{A.style.clipPath=`inset(0 ${A.offsetWidth-X}px 0 0)`;B.style.clipPath=`inset(0 0 0 ${X}px)`}};
+  const kill=()=>{if(!T)return;under.visible=shM.visible=false;if(!TC[k]||TC[k].tF!==T.tF){T.tF.dispose();T.tB.dispose()}T=null;if(mobile){gl.clear();gl.domElement.style.visibility='hidden'}else gl.domElement.style.display='none';shR.style.display=shL.style.display='none';
+   A.style.visibility='';B.style.visibility='';A.style.clipPath='';A.style.translate='';B.style.clipPath='';B.style.translate='';mids.forEach(m=>m.style.visibility='');document.body.classList.remove('turning')};
   const draw=(p)=>{if(mobile)return drawM(p);const {X,W,vw,vh}=T,e=gsap.parseEase('power2.inOut')(p),th0=Math.PI*e;
    const s=Math.sin(Math.PI*p),C=(mobile?1.9:2.6)*s*(Math.cos(Math.PI*p)*1.1+.22);mat.uniforms.bend.value=Math.min(1,s*1.6);
    let minx=X,maxx=X,zmax=0;const du=1/SX;
@@ -253,7 +260,7 @@ window.__exportSnaps=async()=>{await window.__snaps;const o={};for(const K in SN
    const l2=Math.max(0,X-minx);if(!mobile&&minx<X-2){shL.style.cssText=`display:block;left:${minx-sp}px;width:${l2+sp}px;background:linear-gradient(270deg,rgba(30,15,5,${a*.7}),rgba(30,15,5,${a}) ${Math.max(0,l2-sp*.3)}px,transparent ${l2+sp}px)`}else shL.style.display='none'};
  // phone: tall narrow page, spine on the left screen edge. The bottom-right corner peels first and the fold
   // travels diagonally up the sheet; flatter arc (z squashed) so the page doesn't balloon toward the camera.
-  const drawM=(p)=>{const {X,W,vw,vh}=T;p=Math.min(1,p/.62);const e=gsap.parseEase('sine.inOut')(p),s=Math.sin(Math.PI*p);mat.uniforms.bend.value=Math.min(1,s*1.8);
+  const drawM=(p)=>{const {X,W,vw,vh}=T;const e=gsap.parseEase('sine.inOut')(p),s=Math.sin(Math.PI*p);mat.uniforms.bend.value=Math.min(1,s*1.8);
    let maxx=X,zmax=0;const du=1/SX;
    for(let j=0;j<=SY;j++){const v=j/SY,lead=(1-v)*.55*s; // bottom rows run ahead
     const th0=Math.PI*Math.min(1,Math.max(0,e+lead*(1-e)*.5-(v*.12*s))),C=2.4*s*(Math.cos(Math.PI*p)*.9+.35)*(1+lead);
@@ -261,16 +268,16 @@ window.__exportSnaps=async()=>{await window.__snaps;const o={};for(const K in SN
      if(i>0){const u=(i-.5)*du,ph=th0+C*Math.pow(u,2.2);x+=W*du*Math.cos(ph);z+=W*du*Math.sin(ph)*.62}
      pos[k]=x-vw/2;pos[k+1]=-vh/2+v*vh;pos[k+2]=z;
      if(j===SY>>1){maxx=Math.max(maxx,x);zmax=Math.max(zmax,z)}}}
-   geo.attributes.position.needsUpdate=true;geo.computeVertexNormals();gl.render(scene,cam);
+   geo.attributes.position.needsUpdate=true;geo.computeVertexNormals();
    // cast shadow on the page underneath: transform/opacity only (no per-frame blur or blend re-raster)
    const lift=Math.min(1,zmax/(W*.4)),a=.55*(1-.35*lift)*Math.min(1,p*10)*Math.min(1,(1-p)*14),wd=Math.max(0,maxx-X)+28+lift*W*.3;
-   if(maxx>X+2&&a>.01){shR.style.display='block';shR.style.opacity=a.toFixed(3);shR.style.transform=`translate3d(${(X).toFixed(1)}px,0,0) scaleX(${(wd/100).toFixed(4)})`}else shR.style.display='none'};
+   shM.visible=maxx>X+2&&a>.01;shMat.opacity=a;shM.scale.set(wd,vh,1);shM.position.set(X-vw/2,0,0);gl.render(scene,cam)};
   const bTop=()=>{const e=B.closest('.pin-spacer')||B.closest('section');let y=0,n=e;while(n){y+=n.offsetTop;n=n.offsetParent}return y};
   ScrollTrigger.create({start:()=>{const pv=k?ScrollTrigger.getById('turn'+(k-1)):null;return Math.max(0,pv?pv.end+1:0,bTop()-innerHeight-mids.reduce((t,m)=>t+m.offsetHeight,0))},end:()=>bTop(),invalidateOnRefresh:true,id:'turn'+k,
    // phones: never leave a page hanging half-turned. Release finishes or cancels the turn by finger speed / how far it got
-   snap:(mobile||!fine)&&!location.search.includes('nosnap')?{snapTo:(v,self)=>{const pt=mobile?Math.min(1,v/.62):v,vel=self.getVelocity();if(v<=0||v>=1)return v;if(Math.abs(vel)>350)return vel>0?1:0;return pt>.35?1:0},duration:{min:.25,max:.6},delay:.06,ease:'power2.out',inertia:false}:undefined,
+   snap:(mobile||!fine)&&!location.search.includes('nosnap')?{snapTo:(v,self)=>{if(v<=.002||v>=.998)return v;return self.direction>0?(v>.12?1:0):(v<.88?0:1)},duration:{min:.35,max:.8},delay:.22,ease:'power1.inOut',inertia:false}:undefined,
    onUpdate:self=>{const p=self.progress;if(p<=0||p>=1){kill();return}make(self.start);if(!T)return;(mobile?gl.domElement.style.visibility='visible':gl.domElement.style.display='block');document.body.classList.add('turning');
-    A.style.translate=`0 ${self.scroll()-self.start}px`;B.style.translate=`0 ${-(self.end-self.scroll())}px`;draw(p)},
+    if(!mobile){A.style.translate=`0 ${self.scroll()-self.start}px`;B.style.translate=`0 ${-(self.end-self.scroll())}px`}draw(p)},
    onLeave:kill,onLeaveBack:kill});window.__kills.push(kill);
   warm.push(()=>{if(T)return;const st=ScrollTrigger.getById('turn'+k);if(!st)return;make(st.start,true);if(!T)return;gl.initTexture(T.tF);gl.initTexture(T.tB);T=null});
  }
