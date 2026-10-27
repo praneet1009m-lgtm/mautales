@@ -5,8 +5,8 @@
 --fiber:image-set(url("/tex/fiber.webp") 2x);
 --blot:image-set(url("/tex/blot.webp") 2x)}
 *{box-sizing:border-box;margin:0;padding:0}
-html{background:var(--desk)}html.lenis{height:auto}.lenis.lenis-smooth{scroll-behavior:auto}
-body{font-family:var(--sans);color:var(--ink);overflow-x:hidden;background:
+html{background:var(--desk);overflow-x:clip}html.lenis{height:auto}.lenis.lenis-smooth{scroll-behavior:auto}
+body{font-family:var(--sans);color:var(--ink);overflow-x:hidden;overflow-x:clip;background:
  radial-gradient(120% 80% at 50% 0%,#3a2619 0%,#1c110b 70%),var(--desk);background-attachment:fixed;cursor:none}
 body.loading{overflow:hidden}
 a{color:inherit;text-decoration:none;cursor:none}button,input,textarea{font:inherit;color:inherit;cursor:none}
@@ -272,6 +272,9 @@ footer .hand{color:var(--paper);font-size:24px}footer .type{color:#d8c3a3;font-s
 
 #turnGL{position:fixed;inset:0;z-index:75;pointer-events:none;display:none}
 .tw-sh{position:fixed;top:0;bottom:0;z-index:74;display:none;pointer-events:none;mix-blend-mode:multiply;filter:blur(8px)}
+.tw-sh.m{left:0;width:100px;transform-origin:0 0;mix-blend-mode:normal;filter:none;will-change:transform,opacity;background:linear-gradient(90deg,rgba(30,15,5,.55),rgba(30,15,5,.42) 55%,rgba(30,15,5,.12) 82%,transparent)}
+body.turning .sheet{will-change:translate}
+@media (pointer:coarse){.drag{touch-action:pan-y}} /* phones: vertical swipes on stickers still scroll / turn the page */
 section{isolation:isolate}
 body.turning .mo-hint{opacity:0!important;transition:none}
 

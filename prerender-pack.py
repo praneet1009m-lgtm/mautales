@@ -1,7 +1,9 @@
 import json,hashlib,os
 from PIL import Image
 m=json.load(open('public/turn/manifest.json'))
+ids=os.environ.get('PACK_IDS');ids=ids.split(',') if ids else None
 for s in m:
+    if ids is not None and s['id'] not in ids: continue
     d='public/turn/'+s['id'];seen={};new={}
     for K,e in s['snaps'].items():
         p=d+'/'+e['f'];im=Image.open(p);W=im.size[0];x=0
@@ -17,5 +19,5 @@ for s in m:
     for f in os.listdir(d):
         if not f.startswith('n'): os.remove(d+'/'+f)
     for f in os.listdir(d): os.rename(d+'/'+f,d+'/'+f[1:])
-    s['snaps']=new;s['dpr']=1.5
+    s['snaps']=new;s['dpr']=2 if s['mobile'] else 1.5
 json.dump(m,open('public/turn/manifest.json','w'))
