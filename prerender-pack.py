@@ -1,3 +1,5 @@
+# Called by prerender.mjs: crops each saved page texture to the half the page turn uses, removes duplicates and compresses to webp.
+# Needs Python 3 + Pillow (pip install pillow).
 import json,hashlib,os
 from PIL import Image
 m=json.load(open('public/turn/manifest.json'))

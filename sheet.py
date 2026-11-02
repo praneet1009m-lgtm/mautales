@@ -1,3 +1,4 @@
+# Dev tool: pastes several screenshots from shots/ into one contact-sheet image. Usage: python3 sheet.py out.png a.png b.png ...
 import sys;from PIL import Image
 fs=sys.argv[2:];out=sys.argv[1];W=720;H=450
 c=Image.new('RGB',(W*2,H*((len(fs)+1)//2)))
